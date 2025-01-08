@@ -1,4 +1,10 @@
-let gLine
+let gLine = {
+    x: 125,
+    y: 25,
+    width: 150,
+    height: 50,
+    isDrag: false
+}
 let gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
@@ -12,12 +18,8 @@ let gMeme = {
     ]
 }
 
-function createLine(pos) {
-    gLine = {
-        pos,
-        isDrag: false
-    }
-}
+
+
 
 // function createMeme(imgId, lineInx,txt, size, color) {
 //   return {
@@ -43,8 +45,8 @@ function getLine() {
 
 
 function setLineTxt(newText) {
-    gMeme.lines[0] = newText
-    console.log(newText)
+    gMeme.lines[0].txt = newText
+    console.log(gMeme.lines[0].txt)
 
 }
 
@@ -52,14 +54,13 @@ function setLineDrag(isDrag) {
     gLine.isDrag = isDrag
 }
 
-function isLineClicked(clickedPos) {
-    const { pos } = gLine
-    const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
-    return distance <= gLine.size
+function isLineClicked(pos) {
+    const { x, y } = gLine
+    return pos.x >= x && pos.x <= x + gLine.width && pos.y >= y && pos.y <= y + gLine.height
 }
 
 function moveLine(dx, dy) {
-    gLine.pos.x += dx
-    gLine.pos.y += dy
+    gLine.x += dx
+    gLine.y += dy
 
 }

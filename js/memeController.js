@@ -5,12 +5,12 @@ let gStartPos
 
 function onInit() {
     gCanvas = document.querySelector('canvas')
+    console.log(gCanvas)
     gCtx = gCanvas.getContext('2d')
 
-    const up = { x: gCanvas.width / 2, y: gCanvas.height / 4 }
-    createLine(up)
-    renderLine()
     renderMeme()
+    console.log(gMeme.lines[0].txt)
+
 
 }
 function renderMeme() {
@@ -22,24 +22,28 @@ function renderMeme() {
     }
 
     document.querySelector('.gallery').innerHTML = strHtml
-}
-
-function renderLine() {
-    const { pos } = getLine()
-
-    drawLine(pos.x, pos.y)
-}
-
-
-
-
-function drawLine(x = 125, y = 25) {
-    gCtx.strokeStyle = 'black'
-    gCtx.beginPath()
-    gCtx.rect(x, y, 150, 50)
-    gCtx.stroke()
 
 }
+
+
+function renderCanvas() {
+    getMeme()
+    const elImg = new Image()
+    elImg.src = `meme-imgs (square)/${gMeme.selectedImgId}.jpg`
+
+    elImg.onload = () => {
+        gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+        gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
+
+
+        drawText(gMeme.lines[0].txt, 200, 25)
+
+    }
+
+
+}
+
+
 
 function onDown(ev) {
     console.log('ondown')
@@ -54,7 +58,6 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-    console.log('onMove')
 
     const { isDrag } = getLine()
     if (!isDrag) return
@@ -65,8 +68,7 @@ function onMove(ev) {
     moveLine(dx, dy)
 
     gStartPos = pos
-    renderLine()
-
+    renderCanvas()
 }
 
 
@@ -88,33 +90,49 @@ function getEvPos(ev) {
 }
 
 function onSelectImg(elImg) {
-
+    document.querySelector('.gallery').style.display = 'none'
+    document.querySelector('.editor').style.display = 'block'
     getMeme()
     gMeme.selectedImgId = elImg.id
     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
-    renderLine()
 
+    renderCanvas()
+    // drawText(gMeme.lines[0].txt, 200, 25)
 }
 
 
-function drawText(text, x, y) {
+function drawRect(text, x, y) {
 
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'brown'
+    const textWidth = gCtx.measureText(text).width
+    const textHeight = 20
+
+    const padding = 10
+    const rectX = x - textWidth / 2 - padding
+    const rectY = y - textHeight / 2 - padding
+    const rectWidth = textWidth + 2 * padding
+    const rectHeight = textHeight + 2 * padding
+
+    gCtx.strokeStyle = 'black'
+    gCtx.strokeRect(rectX, rectY, rectWidth, rectHeight)
+}
+
+function drawText(text, x, y) {
+    gCtx.lineWidth = 1
+    gCtx.strokeStyle = 'black'
     gCtx.fillStyle = 'black'
-    gCtx.font = '40px Arial'
+    gCtx.font = '20px Arial'
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
+    drawRect(text, x, y)
+
     gCtx.fillText(text, x, y)
-    gCtx.strokeText
+    gCtx.strokeText(text, x, y)
 }
 
 function onSetLineTxt(text) {
-    getMeme()
 
     setLineTxt(text)
-    renderMeme()
-    drawText(text, 200, 50)
+    renderCanvas()
 }
 

@@ -7,7 +7,9 @@ canvas {
 
     border: 1px solid black;
 }
-
+.gallery {
+    display: block;
+}
 .gallery img {
     width: 300px;
     cursor: pointer;
@@ -19,4 +21,9 @@ canvas {
     transition: .3s;
     filter: unset;
 }
+
+.editor {
+    display: none;
+}
+
 
