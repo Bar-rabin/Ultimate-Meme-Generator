@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Meme Generator</title>
+    <link rel="stylesheet" href="main.css" />
+
+</head>
+<body onload='onInit()'>
+    <header class='main-header'>Ultimate Meme Generator</header>
+    <section class='gallery'></section>
+    <section class='editor'>
+        <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
+        <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
+    </section>
+    <script src="js/memeService.js"></script>
+    <script src="js/memeController.js"></script>
+
+</body>
+</html>

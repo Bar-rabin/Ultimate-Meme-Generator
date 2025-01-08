@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+}
+
+canvas {
+    cursor: grab;
+
+    border: 1px solid black;
+}
+
+.gallery img {
+    width: 300px;
+    cursor: pointer;
+    filter: blur(.2rem);
+
+}
+
+.gallery img:hover {
+    transition: .3s;
+    filter: unset;
+}
+
