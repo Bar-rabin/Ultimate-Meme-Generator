@@ -11,13 +11,38 @@
 <body onload='onInit()'>
     <header class='main-header'>
         <div class='logo'>Ultimate Meme Generator</div>
+        <nav class='main-nav'>
+            <a href='#'>Gallery</a>
+            <a href='#'>Edit Mime</a>
+            <a href='#'>Save</a>
+
+
+        </nav>
         
     </header>
     <section class='gallery'></section>
     <section class='editor' >
         <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
         <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
+        <a href="#" onclick="onDownloadCanvas(this)" download="file-name">Download</a>
+        <button onclick='openColorPicker("text")'>🖍️</button>
+        <input type="color" id='color-picker1' style='display: none;' onchange='onChangeTheColorTxt(event)'>
+
+        <button onclick='openColorPicker("border")'>🎨</button>
+        <input type="color" id='color-picker2' style='display: none;' onchange='onChangeTheColorTxtBorder(event)'>
+
+        <button onclick='onBiggerFont()'>A+</button>
+        <button onclick='onSmallerFont()'>A-</button>
+
+        <button onclick='onAddLine()'>Add Line</button>
+
+
+
     </section>
+    <footer class='main-footer'>
+        <div class='logo'>Ultimate Meme Generator</div>
+        <small>Bar Rabinovitz</small>
+    </footer>
     <script src="js/memeService.js"></script>
     <script src="js/memeController.js"></script>
 

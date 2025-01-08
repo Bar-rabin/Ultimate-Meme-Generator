@@ -1,6 +1,7 @@
 let gCanvas
 let gCtx
 let gStartPos
+let gTextSize = 20
 
 
 function onInit() {
@@ -35,7 +36,7 @@ function renderCanvas() {
         gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
         gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
 
-
+        gCtx.font = `${gTextSize}px Arial`
         drawText(gMeme.lines[0].txt, 200, 25)
 
     }
@@ -118,9 +119,9 @@ function drawRect(text, x, y) {
 
 function drawText(text, x, y) {
     gCtx.lineWidth = 1
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'black'
-    gCtx.font = '20px Arial'
+    gCtx.strokeStyle = gCtx.strokeStyle || 'black'
+    gCtx.fillStyle = gCtx.fillStyle || 'black'
+    gCtx.font = `${gTextSize}px Arial`
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
@@ -136,3 +137,51 @@ function onSetLineTxt(text) {
     renderCanvas()
 }
 
+function onDownloadCanvas(elLink) {
+    const dataUrl = gCanvas.toDataURL()
+
+    elLink.href = dataUrl
+    elLink.download = 'my-perfect-meme'
+}
+
+
+function openColorPicker(type) {
+    if (type === 'text') {
+
+        document.getElementById('color-picker1').click()
+    } else if (type === 'border') {
+        document.getElementById('color-picker2').click()
+
+    }
+}
+
+function onChangeTheColorTxt(event) {
+    const selectedColor = event.target.value
+    gCtx.fillStyle = selectedColor
+    renderCanvas()
+}
+
+
+function onChangeTheColorTxtBorder(event) {
+    const selectedColorBorder = event.target.value
+    gCtx.strokeStyle = selectedColorBorder
+    renderCanvas()
+}
+
+
+function onBiggerFont() {
+    gTextSize += 1
+    renderCanvas()
+}
+
+function onSmallerFont() {
+    gTextSize -= 1
+    renderCanvas()
+}
+
+function onAddLine() {
+    const { secondLine } = getMeme()
+    console.log(secondLine)
+
+    drawText(secondLine[0].txt, 200, 350)
+}
