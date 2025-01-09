@@ -17,32 +17,48 @@
 
             <div class='logo'>Ultimate Meme Generator</div>
             <nav class='main-nav'>
-                <a href='#' class='active'>Gallery</a>
-                <a href='#'>Edit Mime</a>
+                <a href='#' onclick='moveToGallery(this)' class='gallery-a active'>Gallery</a>
+                <a href='#' class='edit-a' >Edit Mime</a>
                 <a href='#' onclick='moveToSave()'>Save</a>
     
     
             </nav>
-            <button onclick="toggleMenu()" type="button" class="btn-toggle-menu">☰</button>
+            <div class="btn-toggle-menu">
+                <button onclick="toggleMenu()" type="button">☰</button>
+            </div>
         </div>
     </header>
-    <button onclick='isFlexible()'>i'm flexible </button>
-    <section class='gallery'></section>
+    <button onclick='onGetRandomMeme()'>i'm flexible </button>
+    
+    <section class='main-gallery full'>
+        <div>
+            <input type="file" class="file-input" name="image" onchange="onImgInput(event)" />
+        </div>
+        <div class='gallery'></div>
+
+    </section>
     <section class='editor' >
         <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
-        <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
-        <a href="#" onclick="onDownloadCanvas(this)" download="file-name">Download</a>
-        <button onclick='openColorPicker("text")'>🖍️</button>
-        <input type="color" id='color-picker1' style='display: none;' onchange='onChangeTheColorTxt(event)'>
+        <div class='buttons'>
 
-        <button onclick='openColorPicker("border")'>🎨</button>
-        <input type="color" id='color-picker2' style='display: none;' onchange='onChangeTheColorTxtBorder(event)'>
-
-        <button onclick='onBiggerFont()'>A+</button>
-        <button onclick='onSmallerFont()'>A-</button>
-
-        <button onclick='onAddLine()'>Add Line</button>
-        <button onclick='onSaveMeme()'>Save</button>
+            <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
+            <a href="#" class='download' onclick="onDownloadCanvas(this)" download="file-name">Download</a>
+            <button onclick='openColorPicker("text")'>🖍️</button>
+            <input type="color" id='color-picker1' style='display: none;' onchange='onChangeTheColorTxt(event)'>
+    
+            <button onclick='openColorPicker("border")'>🎨</button>
+            <input type="color" id='color-picker2' style='display: none;' onchange='onChangeTheColorTxtBorder(event)'>
+    
+            <button onclick='onBiggerFont()'>A+</button>
+            <button onclick='onSmallerFont()'>A-</button>
+    
+            <button onclick='onAddLine()'>Add Line</button>
+            <button onclick='onSaveMeme()'>Save</button>
+            <form action="" method="POST" enctype="multipart/form-data" onsubmit="onUploadImg(event)">
+                <input name="img" id="imgData" type="hidden" />
+                <button class="btn" type="submit">Share to Facebook</button>
+              </form>
+        </div>
     </section>
     <section class='save'>
         <canvas width="300" height="300"></canvas>

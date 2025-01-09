@@ -1,5 +1,16 @@
 .editor {
     display: none;
+}
 
+.editor .buttons {
+    display: grid;
+}
+
+.editor .download {
+    color: blue;
+}
+
+.editor .button:hover {
+    background-color: rgb(215, 178, 111);
 }
 

@@ -1,0 +1,13 @@
+.main-gallery {
+display: grid;
+justify-items: center;
+
+
+}
+
+.main-gallery .file-input {
+    background-color: antiquewhite;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -7,6 +7,17 @@
     background-color: var(--clr-primary1);
 }
 
+
+
+
 .main-header .btn-toggle-menu {
-    /* display: block; */
+    background-color: var(--clr-primary1);
+    color: var(--clr-primary2);
+    border: none;
+    font-size: 20px;
+}
+
+.btn-toggle-menu button {
+    color: var(--clr-primary2);
+    background-color: #f0f8ff00;
 }

@@ -18,3 +18,10 @@
     box-shadow: inset 0px -6px 0 var(--clr-primary2);
     cursor: default;
 }
+
+.main-nav .btn-x {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ebf2f70a;
+}

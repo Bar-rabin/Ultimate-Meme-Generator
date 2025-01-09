@@ -24,7 +24,7 @@ function renderMeme() {
         strHtml += `<img id="${imgId}"onclick="selectImg(this)" src="meme-imgs (square)/${imgId}.jpg" />`
     }
 
-    document.querySelector('.gallery').innerHTML = strHtml
+    document.querySelector('.gallery').innerHTML += strHtml
 
 }
 
@@ -115,17 +115,20 @@ function getEvPos(ev) {
 }
 
 function selectImg(elImg) {
+    console.log(elImg)
     document.querySelector('.gallery').style.display = 'none'
     const editor = document.querySelector('.editor')
-    editor.style.display = 'block'
-    editor.classList.toggle('mobile')
+    editor.style.display = 'grid'
 
     getMeme()
+
     gMeme.selectedImgId = elImg.id
     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
 
+    document.querySelector('.active').classList.toggle('active')
+    document.querySelector('.edit-a').classList.toggle('active')
+
     renderCanvas()
-    // drawText(gMeme.lines[0].txt, 200, 25)
 }
 
 
@@ -214,30 +217,26 @@ function onAddLine() {
 }
 
 
-function isFlexible() {
-    document.querySelector('.gallery').style.display = 'none'
-    const editor = document.querySelector('.editor')
-    editor.style.display = 'block'
-    editor.classList.toggle('mobile')
-
+function onGetRandomMeme() {
     const elImg = new Image()
-    elImg.src = `meme-imgs (square)/${getRandomInt(1, 19)}.jpg`
-    console.log(elImg.src)
+    let imgNum = getRandomInt(1, 19)
+    elImg.id = `${imgNum}`
+    elImg.src = `meme-imgs (square)/${imgNum}.jpg`
 
-
-    elImg.onload = () => {
-        gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-        gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
-
-    }
-
-
+    selectImg(elImg)
 }
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
+    let buttonX = `<button class="btn-x" onclick="closeMenu()" type="button">X</button>
+    `
+    document.querySelector('.main-nav').innerHTML += buttonX
 }
 
+function closeMenu() {
+    document.body.classList.toggle('menu-open')
+
+}
 function onSaveMeme() {
     const meme = gCanvas.toDataURL()
     saveMeme(meme)
@@ -252,10 +251,52 @@ function getRandomInt(min, max) {
 }
 
 function moveToSave() {
-    console.log('jjjj')
     document.querySelector('.gallery').style.display = 'none'
     document.querySelector('.editor').style.display = 'none'
-    document.querySelector('.save').style.display = 'block'
+    document.querySelector('.save').style.display = 'grid'
+
 
     renderSave()
+}
+
+function onUploadImg(ev) {
+    ev.preventDefault()
+    const canvasData = gCanvas.toDataURL('image/jpeg')
+
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+
+
+    }
+
+    uploadImg(canvasData, onSuccess)
+}
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, selectImg)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    // document.querySelector('.share-container').innerHTML = ''
+    const reader = new FileReader()
+
+    reader.onload = function (event) {
+        const img = new Image()
+        img.onload = () => {
+            onImageReady(img)
+        }
+        img.src = event.target.result
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+
+function moveToGallery(elAGallery) {
+    elAGallery.classList.toggle('active')
+    document.querySelector('.gallery').style.display = 'grid'
+    document.querySelector('.editor').style.display = 'none'
+    document.querySelector('.edit-a').classList.toggle('active')
+
 }
