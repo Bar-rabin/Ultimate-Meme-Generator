@@ -1,7 +1,10 @@
+'use strict'
+let gCanvasSave
 let gCanvas
 let gCtx
 let gStartPos
 let gTextSize = 20
+let gCtxSave
 
 
 function onInit() {
@@ -10,7 +13,6 @@ function onInit() {
     gCtx = gCanvas.getContext('2d')
 
     renderMeme()
-    console.log(gMeme.lines[0].txt)
 
 
 }
@@ -19,10 +21,32 @@ function renderMeme() {
 
     for (var i = 0; i < 18; i++) {
         var imgId = i + 1
-        strHtml += `<img id=${imgId} onclick="onSelectImg(this)" src="meme-imgs (square)/${imgId}.jpg" />`
+        strHtml += `<img id="${imgId}"onclick="selectImg(this)" src="meme-imgs (square)/${imgId}.jpg" />`
     }
 
     document.querySelector('.gallery').innerHTML = strHtml
+
+}
+
+function renderSave() {
+    var savedMeme = loadFromStorage(STOREGE_KEY)
+    if (savedMeme) {
+        const elImg = new Image()
+        elImg.src = savedMeme
+        console.dir(elImg)
+
+
+        gCanvasSave = document.querySelector('.save canvas')
+        console.log(gCanvasSave)
+        gCtxSave = gCanvasSave.getContext('2d')
+
+
+
+        elImg.onload = () => {
+            gCtxSave.clearRect(0, 0, gCanvasSave.width, gCanvasSave.height)
+            gCtxSave.drawImage(elImg, 0, 0, gCanvasSave.width, gCanvasSave.height)
+        }
+    }
 
 }
 
@@ -90,9 +114,12 @@ function getEvPos(ev) {
 
 }
 
-function onSelectImg(elImg) {
+function selectImg(elImg) {
     document.querySelector('.gallery').style.display = 'none'
-    document.querySelector('.editor').style.display = 'block'
+    const editor = document.querySelector('.editor')
+    editor.style.display = 'block'
+    editor.classList.toggle('mobile')
+
     getMeme()
     gMeme.selectedImgId = elImg.id
     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
@@ -184,4 +211,51 @@ function onAddLine() {
     console.log(secondLine)
 
     drawText(secondLine[0].txt, 200, 350)
+}
+
+
+function isFlexible() {
+    document.querySelector('.gallery').style.display = 'none'
+    const editor = document.querySelector('.editor')
+    editor.style.display = 'block'
+    editor.classList.toggle('mobile')
+
+    const elImg = new Image()
+    elImg.src = `meme-imgs (square)/${getRandomInt(1, 19)}.jpg`
+    console.log(elImg.src)
+
+
+    elImg.onload = () => {
+        gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+        gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
+
+    }
+
+
+}
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
+
+function onSaveMeme() {
+    const meme = gCanvas.toDataURL()
+    saveMeme(meme)
+}
+
+
+
+function getRandomInt(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+}
+
+function moveToSave() {
+    console.log('jjjj')
+    document.querySelector('.gallery').style.display = 'none'
+    document.querySelector('.editor').style.display = 'none'
+    document.querySelector('.save').style.display = 'block'
+
+    renderSave()
 }

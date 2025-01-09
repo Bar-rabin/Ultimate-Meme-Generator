@@ -1,4 +1,16 @@
+'use strict'
 
+const STOREGE_KEY = 'memes'
+
+let gSaveMeme
+
+let gLine = {
+    x: 125,
+    y: 25,
+    width: 150,
+    height: 50,
+    isDrag: false
+}
 let gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
@@ -12,7 +24,7 @@ let gMeme = {
     ],
     secondLine: [
         {
-            txt: 'Second Line',
+            txt: 'second Line',
             size: 20,
             color: 'red',
             isDrag: false,
@@ -21,10 +33,20 @@ let gMeme = {
     ]
 }
 
+
+function getSaveMeme() {
+    return gSaveMeme
+}
+
+
+
 function getMeme() {
     return gMeme
 }
 
+function getLine() {
+    return gLine
+}
 
 
 function setLineTxt(newText) {
@@ -33,10 +55,22 @@ function setLineTxt(newText) {
 
 }
 
+function setLineDrag(isDrag) {
+    gLine.isDrag = isDrag
+}
+
+function isLineClicked(pos) {
+    const { x, y } = gLine
+    return pos.x >= x && pos.x <= x + gLine.width && pos.y >= y && pos.y <= y + gLine.height
+}
+
+function moveLine(dx, dy) {
+    gLine.x += dx
+    gLine.y += dy
+
+}
 
 
-// function isLineClicked(pos) {
-//     const { x, y } = gLine
-//     return pos.x >= x && pos.x <= x + gLine.width && pos.y >= y && pos.y <= y + gLine.height
-// }
-
+function saveMeme(meme) {
+    saveToStorage(STOREGE_KEY, meme)
+}

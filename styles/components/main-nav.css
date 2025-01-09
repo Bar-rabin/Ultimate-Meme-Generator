@@ -1,0 +1,20 @@
+.main-nav {
+    display: contents;
+    
+}
+.main-nav a{
+    display: grid;
+    place-items: center;
+   text-decoration: none;
+}
+
+.main-nav a:hover {
+    box-shadow: inset 0px -6px 0 var(--clr-primary2);
+
+}
+
+.main-nav a.active {
+    color: var(--clr-primary2);
+    box-shadow: inset 0px -6px 0 var(--clr-primary2);
+    cursor: default;
+}

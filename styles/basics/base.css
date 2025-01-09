@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--clr-primary2);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.save {
+
+    display: none;
+}

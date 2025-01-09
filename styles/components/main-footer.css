@@ -1,0 +1,8 @@
+.main-footer {
+    text-align: center;
+    background-color: var(--clr-primary1);
+}
+
+.main-footer small {
+    color: var(--clr-primary2);
+}

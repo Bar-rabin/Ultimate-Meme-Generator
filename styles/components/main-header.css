@@ -1,0 +1,12 @@
+.main-header .header-content {
+    display: flex;
+    display: contents;
+
+}
+.main-header {
+    background-color: var(--clr-primary1);
+}
+
+.main-header .btn-toggle-menu {
+    /* display: block; */
+}
