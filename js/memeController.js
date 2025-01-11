@@ -9,13 +9,21 @@ let gCtxSave
 
 function onInit() {
     gCanvas = document.querySelector('canvas')
-    console.log(gCanvas)
     gCtx = gCanvas.getContext('2d')
 
+    onResize()
     renderMeme()
 
+}
+
+function onResize() {
+    const elContainer = document.querySelector('.canvas-container')
+    gCanvas.width = elContainer.clientWidth - 2
 
 }
+
+
+
 function renderMeme() {
     var strHtml = ''
 
@@ -23,6 +31,8 @@ function renderMeme() {
         var imgId = i + 1
         strHtml += `<img id="${imgId}"onclick="selectImg(this)" src="meme-imgs (square)/${imgId}.jpg" />`
     }
+    strHtml += `<img id="tall" onclick="selectImg(this)"  src='tall.jpg'/>
+    `
 
     document.querySelector('.gallery').innerHTML += strHtml
 
@@ -51,17 +61,17 @@ function renderSave() {
 }
 
 
-function renderCanvas() {
-    getMeme()
+function renderCanvas(src = `meme-imgs (square)/${getMeme().selectedImgId}.jpg`) {
     const elImg = new Image()
-    elImg.src = `meme-imgs (square)/${gMeme.selectedImgId}.jpg`
+    elImg.src = src
+    console.log(elImg.src)
 
     elImg.onload = () => {
         gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
         gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
 
         gCtx.font = `${gTextSize}px Arial`
-        drawText(gMeme.lines[0].txt, 200, 25)
+        drawText(gMeme.lines[0].txt, gCanvas.width / 2, gCanvas.height / 16)
 
     }
 
@@ -115,7 +125,6 @@ function getEvPos(ev) {
 }
 
 function selectImg(elImg) {
-    console.log(elImg)
     document.querySelector('.gallery').style.display = 'none'
     const editor = document.querySelector('.editor')
     editor.style.display = 'grid'
@@ -123,12 +132,13 @@ function selectImg(elImg) {
     getMeme()
 
     gMeme.selectedImgId = elImg.id
+    gCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gCanvas.width
     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
 
     document.querySelector('.active').classList.toggle('active')
     document.querySelector('.edit-a').classList.toggle('active')
 
-    renderCanvas()
+    renderCanvas(elImg.src)
 }
 
 
@@ -279,7 +289,6 @@ function onImgInput(ev) {
 }
 
 function loadImageFromInput(ev, onImageReady) {
-    // document.querySelector('.share-container').innerHTML = ''
     const reader = new FileReader()
 
     reader.onload = function (event) {
@@ -287,6 +296,7 @@ function loadImageFromInput(ev, onImageReady) {
         img.onload = () => {
             onImageReady(img)
         }
+        console.log(img.src)
         img.src = event.target.result
     }
     reader.readAsDataURL(ev.target.files[0])

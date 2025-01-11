@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/styles.css" />
 
 </head>
-<body class='main-layout' onload='onInit()'>
+<body class='main-layout' onload='onInit()' onresize="onResize()">
 
     <div class="main-screen" onclick="toggleMenu()"></div>
 
@@ -34,11 +34,14 @@
         <div>
             <input type="file" class="file-input" name="image" onchange="onImgInput(event)" />
         </div>
-        <div class='gallery'></div>
+        <div class='gallery'>
+        </div>
 
     </section>
     <section class='editor' >
-        <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
+        <div class="canvas-container">
+            <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
+        </div>
         <div class='buttons'>
 
             <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
