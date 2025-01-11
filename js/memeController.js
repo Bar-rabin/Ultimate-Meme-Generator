@@ -222,7 +222,7 @@ function onAddLine() {
     const { secondLine } = getMeme()
     console.log(secondLine)
 
-    drawText(secondLine[0].txt, 200, 350)
+    drawText(secondLine[0].txt, gCanvas.width / 2, gCanvas.width - 50)
 }
 
 
