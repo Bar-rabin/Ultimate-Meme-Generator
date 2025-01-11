@@ -31,8 +31,7 @@ function renderMeme() {
         var imgId = i + 1
         strHtml += `<img id="${imgId}"onclick="selectImg(this)" src="meme-imgs (square)/${imgId}.jpg" />`
     }
-    strHtml += `<img id="tall" onclick="selectImg(this)"  src='tall.jpg'/>
-    `
+
 
     document.querySelector('.gallery').innerHTML += strHtml
 
