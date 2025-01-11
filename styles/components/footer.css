@@ -1,6 +1,7 @@
 .main-footer {
     text-align: center;
     background-color: var(--clr-primary1);
+    margin-top: 60px;
 }
 
 .main-footer small {

@@ -1,4 +1,6 @@
 @media (max-width: 900px) {
+    
+    
     .main-header .header-content {
     display: flex;
     justify-content: space-between;
@@ -80,6 +82,8 @@
 
 
 @media (min-width: 900px) {
+   
+    
     .main-layout {
         grid-template-columns: 
         minmax(var(--layoutpadding), 1fr) minmax(auto, 1060px) minmax(var(--layoutpadding), 1fr);
@@ -92,6 +96,11 @@
     align-items: center
     }
 
+    .gallery {
+        
+        grid-template-columns: repeat(6, 1fr);
+    
+    }
     
 
     .main-nav a {

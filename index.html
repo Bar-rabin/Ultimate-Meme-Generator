@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/styles.css" />
 
 </head>
-<body class='main-layout' onload='onInit()' onresize="onResize()">
+<body class='main-layout' onload='onInit()'>
 
     <div class="main-screen" onclick="toggleMenu()"></div>
 
@@ -43,7 +43,6 @@
             <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
         </div>
         <div class='buttons'>
-
             <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
             <a href="#" class='download' onclick="onDownloadCanvas(this)" download="file-name">Download</a>
             <button onclick='openColorPicker("text")'>🖍️</button>
@@ -61,6 +60,9 @@
                 <input name="img" id="imgData" type="hidden" />
                 <button class="btn" type="submit">Share to Facebook</button>
               </form>
+              <div class='save-modal'>
+                <h2>Saved Meme</h2>
+            </div>
         </div>
     </section>
     <section class='save'>

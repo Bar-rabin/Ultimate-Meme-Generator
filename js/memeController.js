@@ -248,7 +248,12 @@ function closeMenu() {
 }
 function onSaveMeme() {
     const meme = gCanvas.toDataURL()
+    document.querySelector('.save-modal').style.opacity = 1
     saveMeme(meme)
+    setTimeout(() => {
+        document.querySelector('.save-modal').style.opacity = 0
+
+    }, 2000)
 }
 
 
