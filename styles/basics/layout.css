@@ -1,7 +1,9 @@
 .main-layout {
+    position: relative;
     display: grid;
     grid-template-columns: 
     var(--layoutpadding) 1fr var(--layoutpadding);
+    gap: 15px;
 }
 
 .main-layout button{
@@ -32,6 +34,6 @@
 .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 15px;
 
 }

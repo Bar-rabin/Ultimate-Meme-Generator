@@ -1,13 +1,37 @@
 .editor {
     display: none;
+    justify-items: center;
+    margin-top: 10%;
+
 }
 
 .editor .buttons {
     display: grid;
+    background-color:var(--clr-primary3);
+    padding: 34px;
+    border-radius: 10px;
+    width: 80%;
+
+
+
 }
 
-.editor .download {
-    color: blue;
+.editor .buttons .download {
+    text-align: center;
+    color: black;
+    background-color: orange;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 20px;
+
+
+
+}
+
+.editor .buttons input {
+    text-align: center;
+    border: none;
+    border-radius: 10px;
 }
 
 .editor .button:hover {

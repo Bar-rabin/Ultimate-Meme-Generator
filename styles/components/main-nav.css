@@ -1,6 +1,6 @@
 .main-nav {
-    display: contents;
-    
+    display: flex;
+    font-size: large;
 }
 .main-nav a{
     display: grid;

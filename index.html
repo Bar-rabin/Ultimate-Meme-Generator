@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Meme Generator</title>
+    <title>Meme Generator</title>
     <link rel="stylesheet" href="styles/styles.css" />
 
 </head>
+
 <body class='main-layout' onload='onInit()'>
 
     <div class="main-screen" onclick="toggleMenu()"></div>
@@ -15,52 +17,49 @@
     <header class='main-header full'>
         <div class='header-content'>
 
-            <div class='logo'>Ultimate Meme Generator</div>
+            <div class='logo'>Meme Generator</div>
+
             <nav class='main-nav'>
                 <a href='#' onclick='moveToGallery(this)' class='gallery-a active'>Gallery</a>
-                <a href='#' class='edit-a' >Edit Mime</a>
+                <a href='#' class='edit-a'>Edit Mime</a>
                 <a href='#' onclick='moveToSave()'>Save</a>
-    
-    
             </nav>
-            <div class="btn-toggle-menu">
-                <button onclick="toggleMenu()" type="button">☰</button>
-            </div>
+
+            <button class="btn-toggle-menu" onclick="toggleMenu()" type="button">☰</button>
         </div>
     </header>
-    <button onclick='onGetRandomMeme()'>i'm flexible </button>
-    
-    <section class='main-gallery full'>
-        <div>
-            <input type="file" class="file-input" name="image" onchange="onImgInput(event)" />
-        </div>
+
+    <section class='main-gallery'>
+        <button onclick='onGetRandomMeme()'>i'm flexible </button>
+
         <div class='gallery'>
         </div>
 
     </section>
-    <section class='editor' >
+    <section class='editor'>
         <div class="canvas-container">
-            <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"></canvas>
+            <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)"
+                onmouseup="onUp()"></canvas>
         </div>
         <div class='buttons'>
             <input type='text' oninput='onSetLineTxt(value)' placeholder='Your Text'></input>
             <a href="#" class='download' onclick="onDownloadCanvas(this)" download="file-name">Download</a>
             <button onclick='openColorPicker("text")'>🖍️</button>
             <input type="color" id='color-picker1' style='display: none;' onchange='onChangeTheColorTxt(event)'>
-    
+
             <button onclick='openColorPicker("border")'>🎨</button>
             <input type="color" id='color-picker2' style='display: none;' onchange='onChangeTheColorTxtBorder(event)'>
-    
+
             <button onclick='onBiggerFont()'>A+</button>
             <button onclick='onSmallerFont()'>A-</button>
-    
+
             <button onclick='onAddLine()'>Add Line</button>
             <button onclick='onSaveMeme()'>Save</button>
             <form action="" method="POST" enctype="multipart/form-data" onsubmit="onUploadImg(event)">
                 <input name="img" id="imgData" type="hidden" />
                 <button class="btn" type="submit">Share to Facebook</button>
-              </form>
-              <div class='save-modal'>
+            </form>
+            <div class='save-modal'>
                 <h2>Saved Meme</h2>
             </div>
         </div>
@@ -69,12 +68,13 @@
         <canvas width="300" height="300"></canvas>
     </section>
     <footer class='main-footer full'>
-        <div class='logo'>Ultimate Meme Generator</div>
-        <small>Bar Rabinovitz</small>
+        <div class='logo'>Meme Generator</div>
+        <small>Bar Rabinovitz 2025</small>
     </footer>
     <script src="js/storage.service.js"></script>
     <script src="js/memeService.js"></script>
     <script src="js/memeController.js"></script>
 
 </body>
+
 </html>

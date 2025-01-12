@@ -1,0 +1,11 @@
+.canvas-container {
+    text-align: center;
+    width: 80%;
+    background-color:var(--clr-primary3);
+    border-radius: 10px;
+    padding: 20px;
+}
+ 
+.canvas-container canvas {
+    border-radius: 10px;
+}

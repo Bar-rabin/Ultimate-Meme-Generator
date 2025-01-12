@@ -1,5 +1,7 @@
 /* Setup */
 @import url(setup/vars.css);
+@import url(setup/typography.css);
+
 
 
 /* Basics  */
@@ -17,6 +19,8 @@
 @import url(components/footer.css);
 @import url(components/gallery.css);
 @import url(components/save-modal.css);
+@import url(components/canvas-container.css);
+
 
 
 

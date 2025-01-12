@@ -25,7 +25,8 @@ function onResize() {
 
 
 function renderMeme() {
-    var strHtml = ''
+    var strHtml = ` <input type="file" class="file-input" name="image"  onchange="onImgInput(event)" />
+    <button class='file-btn' onclick='triggerFileInput()'>+</button>`
 
     for (var i = 0; i < 18; i++) {
         var imgId = i + 1
@@ -121,6 +122,10 @@ function getEvPos(ev) {
 
     return pos
 
+}
+
+function triggerFileInput() {
+    document.querySelector('.file-input').click()
 }
 
 function selectImg(elImg) {

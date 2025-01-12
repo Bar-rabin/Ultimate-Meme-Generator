@@ -1,13 +1,19 @@
 .main-gallery {
 display: grid;
 justify-items: center;
+gap: 15px;
 
 
 }
 
 .main-gallery .file-input {
-    background-color: antiquewhite;
-    padding: 5px;
-    border-radius: 10px;
-    cursor: pointer;
+   display: none;
+}
+
+.main-gallery .file-btn {
+    display: flow;
+    font-size: xx-large;
+    background-color:#ff98004a;
+    color:  #000000b3;
+
 }
